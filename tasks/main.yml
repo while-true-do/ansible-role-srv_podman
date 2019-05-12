@@ -1,0 +1,11 @@
+---
+# tasks file for while_true_do.srv_podman
+
+- name: Manage podman Packages
+  package:
+    name: "{{ wtd_srv_podman_package }}"
+    state: "{{ wtd_srv_podman_package_state }}"
+  become: true
+  tags:
+    - podman
+    - package

@@ -1,0 +1,7 @@
+---
+# defaults file for while_true_do.srv_podman
+
+wtd_srv_podman_package:
+  - podman
+# State can be present|latest|absent
+wtd_srv_podman_package_state: "present"
