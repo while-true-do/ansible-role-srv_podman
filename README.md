@@ -35,8 +35,7 @@ This role installs podman.
 
 Used Modules:
 
--   [module1](link)
--   [module2](link)
+-   [Ansible Package Module](https://docs.ansible.com/ansible/latest/modules/package_module.html)
 
 ## Installation
 
@@ -79,6 +78,13 @@ can be done in a
   roles:
     - role: while_true_do.srv_podman
 ```
+
+## Known Issues
+
+1.  RedHat Testing is currently not possible in public, due to limitations
+    in subscriptions.
+2.  Some services and features cannot be tested properly, due to limitations
+    in docker.
 
 ## Testing
 
