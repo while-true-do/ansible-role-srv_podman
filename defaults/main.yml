@@ -1,8 +1,17 @@
 ---
 # defaults file for while_true_do.srv_podman
 
-## Role Management
+## Package Management
 wtd_srv_podman_package:
   - podman
 # State can be present|latest|absent
 wtd_srv_podman_package_state: "present"
+
+# podman-docker Packages
+wtd_srv_podman_docker_package:
+  - podman-docker
+# State can be present|latest|absent
+wtd_srv_podman_docker_package_state: "present"
+# Podman conflicts with docker, you can choose what happens, if docker
+# is already installed with replace|skip.
+wtd_srv_podman_docker_package_conflict: "skip"

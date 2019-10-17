@@ -24,6 +24,7 @@ galaxy_info:
         - 30
 
   galaxy_tags:
+    - podman
     - container
     - package
     - service

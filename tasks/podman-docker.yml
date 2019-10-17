@@ -1,0 +1,42 @@
+---
+# tasks file for while_true_do.srv_podman
+
+## Package Management
+- name: "Gather package Facts"
+  package_facts:
+    manager: auto
+  when:
+    - wtd_srv_podman_docker_package_conflict == "skip"
+  tags:
+    - podman
+    - package
+
+- name: "Remove conflict Packages"
+  package:
+    name:
+      - docker
+      - docker-ce
+      - docker-ee
+      - docker-engine
+    state: "absent"
+  become: true
+  when:
+    - wtd_srv_podman_docker_package_conflict == "replace"
+  tags:
+    - podman
+    - package
+
+- name: "Manage podman docker Package"
+  package:
+    name: "{{ wtd_srv_podman_docker_package }}"
+    state: "{{ wtd_srv_podman_docker_package_state }}"
+  become: true
+  when: (wtd_srv_podman_docker_package_conflict == "replace") or
+        (wtd_srv_podman_docker_package_conflict == "skip" and
+        '"docker" not in ansible_facts.package' and
+        '"docker-ce" not in ansible_facts.package' and
+        '"docker-ee" not in ansible_facts.package' and
+        '"docker-engine" not in ansible_facts.package')
+  tags:
+    - podman
+    - package

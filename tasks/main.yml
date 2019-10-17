@@ -10,3 +10,11 @@
   tags:
     - podman
     - package
+
+- name: Include podman-docker Tasks
+  include_tasks: podman-docker.yml
+  when:
+    - wtd_srv_podman_docker_package_state != "absent"
+  tags:
+    - podman
+    - package
