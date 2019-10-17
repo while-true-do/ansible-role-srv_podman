@@ -57,10 +57,20 @@ git clone https://github.com/while-true-do/ansible-role-srv_podman.git while_tru
 ---
 # defaults file for while_true_do.srv_podman
 
+## Package Management
 wtd_srv_podman_package:
   - podman
 # State can be present|latest|absent
 wtd_srv_podman_package_state: "present"
+
+# podman-docker Packages
+wtd_srv_podman_docker_package:
+  - podman-docker
+# State can be present|latest|absent
+wtd_srv_podman_docker_package_state: "present"
+# Podman conflicts with docker, you can choose what happens, if docker
+# is already installed with replace|skip.
+wtd_srv_podman_docker_package_conflict: "skip"
 ```
 
 ### Example Playbook
@@ -77,6 +87,16 @@ can be done in a
 - hosts: all
   roles:
     - role: while_true_do.srv_podman
+```
+
+#### Force Removal of docker and installation of podman-docker
+
+```
+---
+- hosts: all
+  roles:
+    - role: while_true_do.srv_podman
+      wtd_srv_podman_docker_package_conflict: "replace"
 ```
 
 ## Known Issues
